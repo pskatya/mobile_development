@@ -1,0 +1,7 @@
+<resources>
+        <string name="app_name">Music Player</string>
+        <string name="album_art">Album Cover</string>
+        <string name="song_name">My Favorite Song</string>
+        <string name="play">Play</string>
+        <string name="stop">Stop</string>
+</resources>
