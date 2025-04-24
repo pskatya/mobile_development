@@ -34,4 +34,10 @@
         android:name="ru.mirea.pasportnikovaeo.mireaproject.WebViewFragment"
         android:label="Браузер"
         tools:layout="@layout/fragment_web_view" />
+
+    <fragment
+        android:id="@+id/nav_background_task"
+        android:name="ru.mirea.pasportnikovaeo.mireaproject.BackgroundTaskFragment"
+        android:label="Фоновая задача"
+        tools:layout="@layout/fragment_background_task" />
 </navigation>
