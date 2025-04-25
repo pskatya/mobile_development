@@ -27,7 +27,18 @@
             android:title="Браузер" />
         <item
             android:id="@+id/nav_background_task"
-            android:icon="@android:drawable/ic_dialog_info"
             android:title="Фоновая задача"/>
+
+        <item
+            android:id="@+id/nav_compass"
+            android:title="Компас" />
+
+        <item
+            android:id="@+id/nav_camera_note"
+            android:title="Фото-заметка" />
+
+        <item
+            android:id="@+id/nav_voice_note"
+            android:title="Голосовая заметка" />
     </group>
 </menu>

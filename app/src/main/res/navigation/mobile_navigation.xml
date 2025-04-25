@@ -40,4 +40,22 @@
         android:name="ru.mirea.pasportnikovaeo.mireaproject.BackgroundTaskFragment"
         android:label="Фоновая задача"
         tools:layout="@layout/fragment_background_task" />
+
+    <fragment
+        android:id="@+id/nav_compass"
+        android:name="ru.mirea.pasportnikovaeo.mireaproject.CompassFragment"
+        android:label="Компас"
+        tools:layout="@layout/fragment_compass" />
+
+    <fragment
+        android:id="@+id/nav_camera_note"
+        android:name="ru.mirea.pasportnikovaeo.mireaproject.CameraNoteFragment"
+        android:label="Фото-заметка"
+        tools:layout="@layout/fragment_camera_note" />
+
+    <fragment
+        android:id="@+id/nav_voice_note"
+        android:name="ru.mirea.pasportnikovaeo.mireaproject.VoiceNoteFragment"
+        android:label="Голосовая заметка"
+        tools:layout="@layout/fragment_voice_note" />
 </navigation>
