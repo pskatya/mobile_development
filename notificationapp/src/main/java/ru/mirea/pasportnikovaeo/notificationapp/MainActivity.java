@@ -46,14 +46,14 @@ public class MainActivity extends AppCompatActivity {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentText("Congratulation!")
-                .setSmallIcon(R.drawable.ic_launcher_foreground) // Use your own icon here
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText("Much longer text that cannot fit one line..."))
                 .setContentTitle("Mirea");
 
         int importance = NotificationManager.IMPORTANCE_DEFAULT;
-        NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "Student FIO Notification", importance);
+        NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "Приветик!", importance);
         channel.setDescription("MIREA Channel");
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
