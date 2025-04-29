@@ -58,4 +58,16 @@
         android:name="ru.mirea.pasportnikovaeo.mireaproject.VoiceNoteFragment"
         android:label="Голосовая заметка"
         tools:layout="@layout/fragment_voice_note" />
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="ru.mirea.pasportnikovaeo.mireaproject.ProfileFragment"
+        android:label="Профиль"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/nav_files"
+        android:name="ru.mirea.pasportnikovaeo.mireaproject.FilesFragment"
+        android:label="Работа с файлами"
+        tools:layout="@layout/fragment_files" />
 </navigation>

@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Проверка и запрос разрешений
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
                     this,
@@ -64,9 +63,11 @@ public class MainActivity extends AppCompatActivity {
                 R.id.nav_home,
                 R.id.nav_gallery,
                 R.id.nav_slideshow,
-                R.id.nav_compass,      // Новый пункт - компас
-                R.id.nav_camera_note,  // Новый пункт - фото-заметки
-                R.id.nav_voice_note)    // Новый пункт - голосовые заметки
+                R.id.nav_compass,
+                R.id.nav_camera_note,
+                R.id.nav_voice_note,
+                R.id.nav_profile,
+                R.id.nav_files)
                 .setOpenableLayout(drawer)
                 .build();
 

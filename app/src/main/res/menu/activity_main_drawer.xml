@@ -40,5 +40,13 @@
         <item
             android:id="@+id/nav_voice_note"
             android:title="Голосовая заметка" />
+
+        <item
+            android:id="@id/nav_profile"
+            android:title="Профиль" />
+
+        <item
+            android:id="@id/nav_files"
+            android:title="Файлы" />
     </group>
 </menu>
