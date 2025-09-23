@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.MainActivity">
+
+    <LinearLayout
+        android:layout_width="500dp"
+        android:layout_height="231dp"
+        android:layout_marginStart="250dp"
+        android:layout_marginTop="214dp"
+        android:layout_marginBottom="286dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textViewMovie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Нет данных!" />
+
+        <Button
+            android:id="@+id/buttonGetMovie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Отобразить любимый фильм" />
+
+        <EditText
+            android:id="@+id/editTextMovie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Заполни меня" />
+
+        <Button
+            android:id="@+id/buttonSaveMovie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Сохранить любимый фильм" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
