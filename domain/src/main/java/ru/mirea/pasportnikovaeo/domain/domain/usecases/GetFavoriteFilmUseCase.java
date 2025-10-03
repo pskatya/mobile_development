@@ -1,7 +1,7 @@
-package ru.mirea.pasportnikovaeo.movieproject.domain.usecases;
+package ru.mirea.pasportnikovaeo.domain.domain.usecases;
 
-import ru.mirea.pasportnikovaeo.movieproject.domain.models.Movie;
-import ru.mirea.pasportnikovaeo.movieproject.domain.repository.MovieRepository;
+import ru.mirea.pasportnikovaeo.domain.domain.models.Movie;
+import ru.mirea.pasportnikovaeo.domain.domain.repository.MovieRepository;
 
 public class GetFavoriteFilmUseCase {
     private MovieRepository movieRepository;

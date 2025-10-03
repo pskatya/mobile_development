@@ -1,4 +1,4 @@
-package ru.mirea.pasportnikovaeo.movieproject.domain.models;
+package ru.mirea.pasportnikovaeo.domain.domain.models;
 
 public class Movie {
     private int id;
