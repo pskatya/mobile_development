@@ -7,4 +7,6 @@
 Дальше была разработана страница входа, на данный момент при зарегистрированном аккаунте она ведет на пустую Main.
 <img width="1919" height="1012" alt="image" src="https://github.com/user-attachments/assets/35fbdb05-cf3e-4c08-98b9-05370ba9a8c8" />
 
-И соответственно страница регистрации, которая работает благодаря FireBase.
+И соответственно страница регистрации, которая работает благодаря FireBase. Также SharedPreferences, Room и NetworkApi прописаны и объединены в /data/repositories/AuthRepositoryImpl
+<img width="1919" height="1012" alt="image" src="https://github.com/user-attachments/assets/694bd337-c91f-4480-855d-17cd495a603e" />
+
