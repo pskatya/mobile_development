@@ -8,5 +8,6 @@
 <img width="1919" height="1012" alt="image" src="https://github.com/user-attachments/assets/35fbdb05-cf3e-4c08-98b9-05370ba9a8c8" />
 
 И соответственно страница регистрации, которая работает благодаря FireBase. Также SharedPreferences, Room и NetworkApi прописаны и объединены в /data/repositories/AuthRepositoryImpl
-<img width="1919" height="1012" alt="image" src="https://github.com/user-attachments/assets/694bd337-c91f-4480-855d-17cd495a603e" />
+<img width="1919" height="1019" alt="image" src="https://github.com/user-attachments/assets/fee04c7e-c4f8-4456-8af1-abc8f225f585" />
+
 
