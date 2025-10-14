@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="colorBackground" format="color|reference" />
+    <attr name="foregroundColor" format="color|reference" />
+    <attr name="mutedForegroundColor" format="color|reference" />
+    <attr name="cardColor" format="color|reference" />
+    <attr name="inputColor" format="color|reference" />
+    <attr name="mutedColor" format="color|reference" />
+    <attr name="borderColor" format="color|reference" />
+</resources>

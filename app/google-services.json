@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "845267612461",
+    "project_id": "bookshell-ec0ec",
+    "storage_bucket": "bookshell-ec0ec.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:845267612461:android:a2d1132818c724cd5719a4",
+        "android_client_info": {
+          "package_name": "ru.mirea.pasportnikovaeo.bookshell"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeIKoCVlaIx-LH6IUC_MukzseIEx5B9sI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
