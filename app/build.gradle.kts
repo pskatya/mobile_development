@@ -42,5 +42,8 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation(project(":domain"))
     implementation(project(":data"))
+    implementation("androidx.lifecycle:lifecycle-viewmodel:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-livedata:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-runtime:2.6.2")
 
 }

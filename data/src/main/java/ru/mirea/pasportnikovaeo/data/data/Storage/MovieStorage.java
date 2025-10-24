@@ -1,8 +1,8 @@
 package ru.mirea.pasportnikovaeo.data.data.Storage;
 
-import ru.mirea.pasportnikovaeo.data.data.Storage.models.Movie;
+import ru.mirea.pasportnikovaeo.domain.domain.models.Movie;
 
 public interface MovieStorage {
-    public Movie get();
-    public boolean save(Movie movie);
+    Movie get();
+    boolean save(Movie movie);
 }
