@@ -117,8 +117,6 @@ public class MainActivity extends AppCompatActivity {
         // Кнопка повтора
         binding.retryButton.setOnClickListener(v -> loadBooks());
 
-        // Обработчик клика по книге
-        // Обработчик клика по книге
         bookAdapter.setOnBookClickListener(book -> {
             Intent intent = new Intent(MainActivity.this, BookDetailActivity.class);
             intent.putExtra("BOOK_ID", book.getId());

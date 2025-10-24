@@ -31,14 +31,38 @@ public class BookRepositoryImpl implements BookRepository {
         this.database = database;
     }
 
+    // Метод для создания заглушки данных
+    private List<BookDto> createMockBooks() {
+        List<BookDto> mockBooks = new ArrayList<>();
+
+        mockBooks.add(new BookDto("1", "The Midnight Library", "Matt Haig",
+                "https://example.com/cover1.jpg", "https://example.com/book1", 9.99, "USD"));
+
+        mockBooks.add(new BookDto("2", "Atomic Habits", "James Clear",
+                "https://example.com/cover2.jpg", "https://example.com/book2", 11.99, "USD"));
+
+        mockBooks.add(new BookDto("3", "The Alchemist", "Paulo Coelho",
+                "https://example.com/cover3.jpg", "https://example.com/book3", 8.99, "USD"));
+
+        mockBooks.add(new BookDto("4", "1984", "George Orwell",
+                "https://example.com/cover4.jpg", "https://example.com/book4", 7.99, "USD"));
+
+        mockBooks.add(new BookDto("5", "To Kill a Mockingbird", "Harper Lee",
+                "https://example.com/cover5.jpg", "https://example.com/book5", 10.99, "USD"));
+
+        return mockBooks;
+    }
+
     @Override
     public void getBooks(BooksCallback callback) {
         isLoading.setValue(true);
 
         new Thread(() -> {
             try {
-                // Пробуем получить данные из сети
-                List<BookDto> bookDtos = networkApi.getBooks();
+                // ИЗМЕНИЛ: Используем заглушку вместо реального API
+                // БЫЛО: List<BookDto> bookDtos = networkApi.getBooks();
+                List<BookDto> bookDtos = createMockBooks(); // ← ЗАГЛУШКА ДАННЫХ
+
                 List<Book> books = convertFromDtoToDomainBooks(bookDtos);
 
                 networkBooks.postValue(books);
@@ -118,10 +142,18 @@ public class BookRepositoryImpl implements BookRepository {
 
         new Thread(() -> {
             try {
-                // Пробуем поиск в сети
-                List<BookDto> bookDtos = networkApi.searchBooks(query);
-                List<Book> books = convertFromDtoToDomainBooks(bookDtos);
+                // ИЗМЕНИЛ: Используем заглушку для поиска
+                // БЫЛО: List<BookDto> bookDtos = networkApi.searchBooks(query);
+                List<BookDto> allBooks = createMockBooks(); // ← ЗАГЛУШКА ДАННЫХ
+                List<BookDto> filteredBooks = new ArrayList<>();
+                for (BookDto book : allBooks) {
+                    if (book.getTitle().toLowerCase().contains(query.toLowerCase()) ||
+                            book.getAuthor().toLowerCase().contains(query.toLowerCase())) {
+                        filteredBooks.add(book);
+                    }
+                }
 
+                List<Book> books = convertFromDtoToDomainBooks(filteredBooks);
                 isLoading.postValue(false);
                 callback.onSuccess(books);
 
@@ -149,10 +181,19 @@ public class BookRepositoryImpl implements BookRepository {
 
         new Thread(() -> {
             try {
-                // Пробуем получить из сети
-                BookDto bookDto = networkApi.getBookDetails(bookId);
-                if (bookDto != null) {
-                    Book book = bookDto.toBook();
+                // ИЗМЕНИЛ: Используем заглушку для деталей книги
+                // БЫЛО: BookDto bookDto = networkApi.getBookDetails(bookId);
+                List<BookDto> allBooks = createMockBooks(); // ← ЗАГЛУШКА ДАННЫХ
+                BookDto foundBook = null;
+                for (BookDto book : allBooks) {
+                    if (book.getId().equals(bookId)) {
+                        foundBook = book;
+                        break;
+                    }
+                }
+
+                if (foundBook != null) {
+                    Book book = foundBook.toBook();
                     isLoading.postValue(false);
                     callback.onSuccess(book);
                 } else {
