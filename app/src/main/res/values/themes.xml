@@ -47,5 +47,16 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
         <item name="android:windowDrawsSystemBarBackgrounds">false</item>
+    </style><!-- Добавьте эти стили в ваш themes.xml -->
+    <style name="CardStyle">
+        <item name="cardCornerRadius">12dp</item>
+        <item name="cardElevation">4dp</item>
+        <item name="cardBackgroundColor">?attr/colorSurface</item>
     </style>
+
+    <style name="ChipFilterStyle">
+        <item name="chipBackgroundColor">@color/chip_background_color</item>
+        <item name="chipStrokeColor">?attr/colorOutline</item>
+    </style>
+
 </resources>
