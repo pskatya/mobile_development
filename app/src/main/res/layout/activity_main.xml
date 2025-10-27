@@ -1,50 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.MainActivity">
+    android:padding="16dp">
 
     <LinearLayout
-        android:layout_width="500dp"
-        android:layout_height="231dp"
-        android:layout_marginStart="250dp"
-        android:layout_marginTop="214dp"
-        android:layout_marginBottom="286dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textViewMovie"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Нет данных!" />
-
-        <Button
-            android:id="@+id/buttonGetMovie"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Отобразить любимый фильм" />
+            android:text="Любимый фильм"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="32dp" />
 
         <EditText
             android:id="@+id/editTextMovie"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="text"
-            android:text="Заполни меня" />
+            android:hint="Введите название фильма"
+            android:layout_marginBottom="16dp" />
 
         <Button
             android:id="@+id/buttonSaveMovie"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Сохранить любимый фильм" />
+            android:text="Сохранить фильм"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/buttonGetMovie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Показать любимый фильм"
+            android:layout_marginBottom="32dp" />
+
+        <TextView
+            android:id="@+id/textViewMovie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="120dp"
+            android:text="Результат будет здесь"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:padding="16dp"
+            android:background="#f0f0f0" />
 
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
