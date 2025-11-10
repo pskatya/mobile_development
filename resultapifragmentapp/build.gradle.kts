@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "ru.mirea.pasportnikovaeo.movieproject"
+    namespace = "ru.mirea.pasportnikovaeo.resultapifragmentapp"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "ru.mirea.pasportnikovaeo.movieproject"
+        applicationId = "ru.mirea.pasportnikovaeo.resultapifragmentapp"
         minSdk = 26
         targetSdk = 35
         versionCode = 1
@@ -40,16 +40,4 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    implementation(project(":domain"))
-    implementation(project(":data"))
-    implementation("androidx.lifecycle:lifecycle-viewmodel:2.6.2")
-    implementation("androidx.lifecycle:lifecycle-livedata:2.6.2")
-    implementation("androidx.lifecycle:lifecycle-runtime:2.6.2")
-    implementation("com.squareup.retrofit2:retrofit:2.11.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
-    implementation("com.squareup.picasso:picasso:2.71828")
-    implementation("androidx.recyclerview:recyclerview:1.3.2")
-    implementation("androidx.cardview:cardview:1.0.0")
-    implementation("androidx.fragment:fragment:1.8.5")
-
 }
