@@ -9,3 +9,7 @@
 **ResultApiFragmentApp** - передача данных между фрагментами через Fragment Result API, демонстрирует одноразовую коммуникацию с отображением результатов в BottomSheetDialog.
 <img width="1280" height="675" alt="image" src="https://github.com/user-attachments/assets/856a4127-afe3-4aed-bcbc-5e44940e2fb2" />
 
+Создана страница профиля. Сделан бэкстек.
+<img width="1919" height="1015" alt="image" src="https://github.com/user-attachments/assets/e73ffa7d-419a-4b25-a7aa-811afe49a5a6" />
+
+
