@@ -17,10 +17,11 @@ public class BookEntity {
     public String currency;
     public String category;
     public long addedDate;
+    public boolean isLiked; // ← ДОБАВИТЬ это поле
 
     public BookEntity(@NonNull String id, String title, String author, String coverUrl,
                       String externalLink, Double price, String currency,
-                      String category, long addedDate) {
+                      String category, long addedDate, boolean isLiked) { // ← ДОБАВИТЬ параметр
         this.id = id;
         this.title = title;
         this.author = author;
@@ -30,5 +31,6 @@ public class BookEntity {
         this.currency = currency;
         this.category = category;
         this.addedDate = addedDate;
+        this.isLiked = isLiked; // ← Инициализировать
     }
 }

@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">BookShell</string>
+    <!-- Accessibility strings -->
+    <string name="like_button_content_description">Add to favorites</string>
+    <string name="book_cover_content_description">Book cover image</string>
+    <string name="external_link_content_description">External link</string>
+    <string name="favorite_book">Add %s to favorites</string>
+    <string name="remove_favorite_book">Remove %s from favorites</string>
+    <string name="login_required">Login Required</string>
+    <string name="login_required_message">Please Login to Access Library</string>
+    <string name="login_required_description">You need to be logged in to view your book library and saved books</string>
+    <string name="login">Login</string>
 </resources>

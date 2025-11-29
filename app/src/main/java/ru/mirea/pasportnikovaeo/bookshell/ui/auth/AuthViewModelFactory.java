@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import ru.mirea.pasportnikovaeo.domain.repositories.AuthRepository;
-import ru.mirea.pasportnikovaeo.ui.auth.AuthViewModel;
+import ru.mirea.pasportnikovaeo.bookshell.ui.auth.AuthViewModel;
 
 public class AuthViewModelFactory implements ViewModelProvider.Factory {
     private AuthRepository authRepository;

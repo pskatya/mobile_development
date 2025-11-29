@@ -8,6 +8,7 @@ public interface AuthRepository {
     User getCurrentUser();
     void logout();
     boolean isUserLoggedIn();
+    void updateUserName(String userId, String newName, AuthCallback callback);
 
     interface AuthCallback {
         void onSuccess(User user);

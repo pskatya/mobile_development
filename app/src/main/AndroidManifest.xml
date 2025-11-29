@@ -28,6 +28,9 @@
             android:name=".ui.main.MainActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.library.LibraryActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.detail.BookDetailActivity"
             android:exported="false" />
 

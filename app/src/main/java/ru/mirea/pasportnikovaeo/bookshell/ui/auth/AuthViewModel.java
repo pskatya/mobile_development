@@ -1,4 +1,4 @@
-package ru.mirea.pasportnikovaeo.ui.auth;
+package ru.mirea.pasportnikovaeo.bookshell.ui.auth;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -12,6 +12,7 @@ import ru.mirea.pasportnikovaeo.domain.usecase.RegisterUseCase;
 public class AuthViewModel extends ViewModel {
     private LoginUseCase loginUseCase;
     private RegisterUseCase registerUseCase;
+    private AuthRepository authRepository;
 
     // LiveData для UI состояния
     private MutableLiveData<Boolean> isLoading = new MutableLiveData<>(false);
@@ -21,6 +22,7 @@ public class AuthViewModel extends ViewModel {
     private MutableLiveData<Boolean> isUserLoggedIn = new MutableLiveData<>();
 
     public AuthViewModel(AuthRepository authRepository) {
+        this.authRepository = authRepository;
         this.loginUseCase = new LoginUseCase(authRepository);
         this.registerUseCase = new RegisterUseCase(authRepository);
 
@@ -29,12 +31,15 @@ public class AuthViewModel extends ViewModel {
     }
 
     private void checkUserLoginStatus() {
-        boolean loggedIn = loginUseCase.isUserLoggedIn();
+        boolean loggedIn = authRepository.isUserLoggedIn();
         isUserLoggedIn.setValue(loggedIn);
 
         if (loggedIn) {
-            // Если пользователь уже авторизован, получаем его данные
-            // В реальном приложении здесь бы был UseCase для получения текущего пользователя
+            // Загружаем данные текущего пользователя
+            User user = authRepository.getCurrentUser();
+            if (user != null) {
+                currentUser.setValue(user);
+            }
         }
     }
 
@@ -78,6 +83,38 @@ public class AuthViewModel extends ViewModel {
                 authError.postValue("Registration failed: " + e.getMessage());
             }
         });
+    }
+
+    // ✅ ДОБАВЛЕН МЕТОД LOGOUT
+    public void logout() {
+        isLoading.setValue(true);
+
+        // Выполняем выход в фоновом потоке
+        new Thread(() -> {
+            try {
+                // Вызываем logout в репозитории
+                authRepository.logout();
+
+                // Обновляем UI в основном потоке
+                isLoading.postValue(false);
+                currentUser.postValue(null);
+                authSuccess.postValue(false);
+                isUserLoggedIn.postValue(false);
+                authError.postValue(null);
+
+            } catch (Exception e) {
+                isLoading.postValue(false);
+                authError.postValue("Logout failed: " + e.getMessage());
+            }
+        }).start();
+    }
+
+    // ✅ ДОБАВЛЕН МЕТОД ДЛЯ ОБНОВЛЕНИЯ ДАННЫХ ПОЛЬЗОВАТЕЛЯ
+    public void refreshUserData() {
+        User user = authRepository.getCurrentUser();
+        if (user != null) {
+            currentUser.setValue(user);
+        }
     }
 
     // LiveData геттеры

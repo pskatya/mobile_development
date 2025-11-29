@@ -1,6 +1,8 @@
 package ru.mirea.pasportnikovaeo.data.repositories;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import ru.mirea.pasportnikovaeo.data.local.database.AppDatabase;
 import ru.mirea.pasportnikovaeo.data.local.database.entity.UserEntity;
 import ru.mirea.pasportnikovaeo.data.local.preferences.SharedPrefsManager;
@@ -10,27 +12,26 @@ import ru.mirea.pasportnikovaeo.data.model.UserDto;
 import ru.mirea.pasportnikovaeo.domain.repositories.AuthRepository;
 
 public class AuthRepositoryImpl implements AuthRepository {
-    private FirebaseAuthSource firebaseAuth; // Способ 1: Firebase (сеть)
-    private SharedPrefsManager prefs;        // Способ 2: SharedPreferences
-    private AppDatabase database;            // Способ 3: Room Database
+    private FirebaseAuthSource firebaseAuth;
+    private SharedPrefsManager prefs;
+    private AppDatabase database;
     private Context context;
+    private Handler mainHandler;
 
     public AuthRepositoryImpl(Context context) {
         this.context = context;
         this.firebaseAuth = new FirebaseAuthSource();
         this.prefs = new SharedPrefsManager(context);
         this.database = AppDatabase.getInstance(context);
+        this.mainHandler = new Handler(Looper.getMainLooper());
     }
 
     @Override
     public void login(String email, String password, AuthCallback callback) {
-        // Способ 1: Firebase Auth (сеть)
         firebaseAuth.login(email, password)
                 .addOnSuccessListener(userDto -> {
-                    // Способ 2: Сохраняем в SharedPreferences
                     prefs.saveUserData(userDto.getId(), userDto.getEmail(), userDto.getName());
 
-                    // Способ 3: Сохраняем в Room Database
                     UserEntity userEntity = new UserEntity(
                             userDto.getId(),
                             userDto.getEmail(),
@@ -40,21 +41,21 @@ public class AuthRepositoryImpl implements AuthRepository {
 
                     new Thread(() -> {
                         database.userDao().insertUser(userEntity);
-                        callback.onSuccess(userDto.toUser());
+                        // Используем mainHandler для callback'а
+                        mainHandler.post(() -> callback.onSuccess(userDto.toUser()));
                     }).start();
                 })
-                .addOnFailureListener(callback::onError);
+                .addOnFailureListener(e -> {
+                    mainHandler.post(() -> callback.onError(e));
+                });
     }
 
     @Override
     public void register(String email, String password, String name, AuthCallback callback) {
-        // Способ 1: Firebase Auth (сеть)
         firebaseAuth.register(email, password, name)
                 .addOnSuccessListener(userDto -> {
-                    // Способ 2: SharedPreferences
                     prefs.saveUserData(userDto.getId(), userDto.getEmail(), name);
 
-                    // Способ 3: Room Database
                     UserEntity userEntity = new UserEntity(
                             userDto.getId(),
                             userDto.getEmail(),
@@ -64,21 +65,21 @@ public class AuthRepositoryImpl implements AuthRepository {
 
                     new Thread(() -> {
                         database.userDao().insertUser(userEntity);
-                        callback.onSuccess(new User(userDto.getId(), userDto.getEmail(), name));
+                        mainHandler.post(() -> callback.onSuccess(new User(userDto.getId(), userDto.getEmail(), name)));
                     }).start();
                 })
-                .addOnFailureListener(callback::onError);
+                .addOnFailureListener(e -> {
+                    mainHandler.post(() -> callback.onError(e));
+                });
     }
 
     @Override
     public User getCurrentUser() {
-        // Приоритет 1: Firebase Auth (самый актуальный)
         UserDto firebaseUser = firebaseAuth.getCurrentUser();
         if (firebaseUser != null) {
             return firebaseUser.toUser();
         }
 
-        // Приоритет 2: SharedPreferences (быстрая проверка)
         if (prefs.isLoggedIn()) {
             String userId = prefs.getUserId();
             String email = prefs.getUserEmail();
@@ -89,7 +90,6 @@ public class AuthRepositoryImpl implements AuthRepository {
             }
         }
 
-        // Приоритет 3: Room Database (резервное хранилище)
         String userId = prefs.getUserId();
         if (userId != null) {
             UserEntity roomUser = database.userDao().getUserById(userId);
@@ -100,20 +100,17 @@ public class AuthRepositoryImpl implements AuthRepository {
 
         return null;
     }
+
     @Override
     public boolean isUserLoggedIn() {
-        // Проверяем, вошел ли пользователь через любой из источников данных
         return firebaseAuth.getCurrentUser() != null || prefs.isLoggedIn();
     }
+
     @Override
     public void logout() {
-        // Способ 1: Firebase logout
         firebaseAuth.logout();
-
-        // Способ 2: Очищаем SharedPreferences
         prefs.clearUserData();
 
-        // Способ 3: Удаляем из Room Database (опционально)
         String userId = prefs.getUserId();
         if (userId != null) {
             new Thread(() -> {
@@ -122,22 +119,46 @@ public class AuthRepositoryImpl implements AuthRepository {
         }
     }
 
-    // Дополнительные методы для демонстрации всех трех способов
+    @Override
+    public void updateUserName(String userId, String newName, AuthCallback callback) {
+        new Thread(() -> {
+            try {
+                // 1. Обновляем в Room
+                database.userDao().updateUserName(userId, newName);
+
+                // 2. Обновляем в SharedPreferences
+                prefs.updateUserName(newName);
+
+                // 3. Обновляем в Firebase
+                firebaseAuth.updateUserName(newName)
+                        .addOnSuccessListener(aVoid -> {
+                            User updatedUser = new User(userId, prefs.getUserEmail(), newName);
+                            mainHandler.post(() -> callback.onSuccess(updatedUser));
+                        })
+                        .addOnFailureListener(e -> {
+                            // Если не удалось обновить в Firebase, все равно возвращаем успех
+                            // так как данные сохранены локально
+                            User updatedUser = new User(userId, prefs.getUserEmail(), newName);
+                            mainHandler.post(() -> callback.onSuccess(updatedUser));
+                        });
+
+            } catch (Exception e) {
+                mainHandler.post(() -> callback.onError(e));
+            }
+        }).start();
+    }
+
     public String getStorageInfo() {
         StringBuilder info = new StringBuilder();
 
-        // Информация из SharedPreferences
         info.append("SharedPreferences: ")
                 .append(prefs.isLoggedIn() ? "User logged in" : "No user data")
                 .append("\n");
 
-        // Информация из Room
         new Thread(() -> {
             int userCount = database.userDao().getUserCount();
-            // Можно передать через callback или LiveData
         }).start();
 
-        // Информация из Firebase
         UserDto firebaseUser = firebaseAuth.getCurrentUser();
         info.append("Firebase Auth: ")
                 .append(firebaseUser != null ? "User active" : "No active session");

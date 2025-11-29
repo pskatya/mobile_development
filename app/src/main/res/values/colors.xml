@@ -58,7 +58,7 @@
     <color name="md_theme_dark_onTertiary">#4A2532</color>
     <color name="md_theme_dark_tertiaryContainer">#633B48</color>
     <color name="md_theme_dark_onTertiaryContainer">#FFD8E4</color>
-
+    <color name="white">#FFFFFFFF</color>
     <color name="md_theme_dark_error">#FFB4AB</color>
     <color name="md_theme_dark_onError">#690005</color>
     <color name="md_theme_dark_errorContainer">#93000A</color>
@@ -128,6 +128,7 @@
     <color name="chip_selected">@color/md_theme_light_primaryContainer</color>
     <color name="chip_unselected">@color/md_theme_light_surfaceVariant</color>
     <!-- Chip Colors -->
+    <color name="red_500">#F44336</color>
     <color name="chip_background_color">@color/md_theme_light_surfaceVariant</color>
     <color name="chip_stroke_color">@color/md_theme_light_outline</color>
 </resources>

@@ -231,16 +231,6 @@
                 android:layout_marginTop="32dp"
                 app:icon="@drawable/ic_external_link" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/add_to_library_btn"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:text="Add to My Library"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                style="@style/Widget.Material3.Button.OutlinedButton"
-                android:layout_marginTop="12dp" />
-
         </LinearLayout>
 
     </LinearLayout>

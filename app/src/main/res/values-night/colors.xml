@@ -34,10 +34,11 @@
     <color name="md_theme_surfaceContainerHighest">@color/md_theme_dark_surfaceContainerHighest</color>
     <color name="md_theme_surfaceContainerLow">@color/md_theme_dark_surfaceContainerLow</color>
     <color name="md_theme_surfaceContainerLowest">@color/md_theme_dark_surfaceContainerLowest</color>
+    <color name="white">#FFFFFFFF</color>
     <!-- Bottom Navigation Colors -->
     <color name="bottom_nav_selected">@color/md_theme_light_primary</color>
     <color name="bottom_nav_unselected">@color/md_theme_light_onSurfaceVariant</color>
-
+    <color name="red_500">#F44336</color>
     <!-- Chip Colors -->
     <color name="chip_selected">@color/md_theme_light_primaryContainer</color>
     <color name="chip_unselected">@color/md_theme_light_surfaceVariant</color>

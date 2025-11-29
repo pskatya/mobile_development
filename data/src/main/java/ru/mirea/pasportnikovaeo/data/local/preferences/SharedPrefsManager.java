@@ -28,6 +28,13 @@ public class SharedPrefsManager {
         editor.apply();
     }
 
+    // Добавьте этот метод для обновления имени пользователя
+    public void updateUserName(String newName) {
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(KEY_USER_NAME, newName);
+        editor.apply();
+    }
+
     public String getUserId() {
         return prefs.getString(KEY_USER_ID, null);
     }

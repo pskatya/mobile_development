@@ -19,4 +19,7 @@ public interface UserDao {
 
     @Query("SELECT COUNT(*) FROM users")
     int getUserCount();
+
+    @Query("UPDATE users SET name = :newName WHERE id = :userId")
+    void updateUserName(String userId, String newName);
 }

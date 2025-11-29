@@ -3,23 +3,29 @@ package ru.mirea.pasportnikovaeo.bookshell.ui.auth;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import ru.mirea.pasportnikovaeo.bookshell.utils.CurrencyUtils;
 import ru.mirea.pasportnikovaeo.bookshell.R;
 import ru.mirea.pasportnikovaeo.bookshell.databinding.ActivityAuthBinding;
 import ru.mirea.pasportnikovaeo.bookshell.ui.main.MainActivity;
 import ru.mirea.pasportnikovaeo.domain.model.User;
 import ru.mirea.pasportnikovaeo.domain.repositories.AuthRepository;
 import ru.mirea.pasportnikovaeo.data.repositories.AuthRepositoryImpl;
+import ru.mirea.pasportnikovaeo.domain.repositories.CurrencyRepository;
+import ru.mirea.pasportnikovaeo.data.repositories.CurrencyRepositoryImpl;
+import ru.mirea.pasportnikovaeo.domain.model.CurrencyRates;
 
 public class AuthActivity extends AppCompatActivity {
     private ActivityAuthBinding binding;
     private boolean isLoginMode = true;
 
     private AuthRepository authRepository;
+    private CurrencyRepository currencyRepository;
     private static final String TAG = "AuthActivity";
 
     @Override
@@ -30,13 +36,68 @@ public class AuthActivity extends AppCompatActivity {
 
         Log.d(TAG, "AuthActivity created");
 
-        // Инициализация репозитория
+        // Инициализация репозиториев
         authRepository = new AuthRepositoryImpl(this);
+        currencyRepository = new CurrencyRepositoryImpl();
+
+        // Загружаем курс валют при запуске
+        loadCurrencyRates();
 
         // Проверяем, не авторизован ли уже пользователь
         checkCurrentUser();
 
         setupUI();
+    }
+
+    private void loadCurrencyRates() {
+        currencyRepository.getCurrencyRates(new CurrencyRepository.CurrencyCallback() {
+            @Override
+            public void onSuccess(CurrencyRates rates) {
+                runOnUiThread(() -> {
+                    // Сохраняем только USD в SharedPreferences
+                    SharedPreferences prefs = getSharedPreferences("app_prefs", MODE_PRIVATE);
+                    prefs.edit()
+                            .putFloat("usd_to_rub", (float) rates.getUsdToRub())
+                            .apply();
+
+                    // Обновляем отображение курса (только USD)
+                    updateCurrencyDisplay(rates.getUsdToRub());
+
+                    Log.d(TAG, "USD rate loaded: " + rates.getUsdToRub());
+                });
+            }
+
+            @Override
+            public void onError(Exception e) {
+                runOnUiThread(() -> {
+                    // Используем курс по умолчанию при ошибке
+                    SharedPreferences prefs = getSharedPreferences("app_prefs", MODE_PRIVATE);
+                    float defaultUsd = 95.50f;
+
+                    prefs.edit()
+                            .putFloat("usd_to_rub", defaultUsd)
+                            .apply();
+
+                    // Показываем курс по умолчанию
+                    updateCurrencyDisplay(defaultUsd);
+
+                    Log.w(TAG, "Failed to load currency rates, using default USD: " + e.getMessage());
+                });
+            }
+        });
+    }
+
+    private void updateCurrencyDisplay(double usdRate) {
+        String currencyText = String.format("USD: %.2f RUB", usdRate);
+
+        // Находим TextView для отображения курса в футере
+        View footerCard = findViewById(R.id.currency_footer_card);
+        if (footerCard != null) {
+            android.widget.TextView currencyTextView = footerCard.findViewById(R.id.currency_rates_text);
+            if (currencyTextView != null) {
+                currencyTextView.setText(currencyText);
+            }
+        }
     }
 
     private void checkCurrentUser() {
