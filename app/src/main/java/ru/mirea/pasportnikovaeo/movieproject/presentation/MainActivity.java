@@ -24,14 +24,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Инициализация ViewModel с фабрикой
         ViewModelFactory factory = new ViewModelFactory(this);
         mainViewModel = new ViewModelProvider(this, factory).get(MainViewModel.class);
 
         editTextMovie = findViewById(R.id.editTextMovie);
         textViewMovie = findViewById(R.id.textViewMovie);
 
-        // Наблюдаем за изменениями LiveData
         setupObservers();
         setupClickListeners();
     }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Цветовая гамма для приложения -->
+    <color name="primary">#5D4037</color>          <!-- Коричневый основной -->
+    <color name="primary_dark">#3E2723</color>      <!-- Темно-коричневый -->
+    <color name="primary_light">#8D6E63</color>     <!-- Светло-коричневый -->
+    <color name="accent">#4CAF50</color>            <!-- Зеленый акцент -->
+
+    <!-- Фоны экранов -->
+    <color name="background_home">#FFF8E1</color>   <!-- Светло-желтый -->
+    <color name="background_books">#E8F5E9</color>  <!-- Светло-зеленый -->
+    <color name="background_settings">#F3E5F5</color><!-- Светло-фиолетовый -->
+
+    <!-- Текст -->
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+    <color name="text_on_primary">#FFFFFF</color>
+</resources>

@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">NavigationDrawerApp</string>
+    <string name="navigation_drawer_open">Открыть меню</string>
+    <string name="navigation_drawer_close">Закрыть меню</string>
+
+    <!-- Меню -->
+    <string name="menu_home">Главная</string>
+    <string name="menu_books">Книги</string>
+    <string name="menu_settings">Настройки</string>
+    <string name="menu_exit">Выход</string>
+
+    <!-- Подсказки -->
+    <string name="hint_open_menu">Нажмите ☰ вверху слева</string>
+</resources>

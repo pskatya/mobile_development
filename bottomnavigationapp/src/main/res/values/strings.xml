@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Мое приложение</string>
+    <string name="title_home">Главная</string>
+    <string name="title_workout">Тренировки</string>
+    <string name="title_profile">Профиль</string>
+    <string name="hello_home">Привет! Это главный экран</string>
+    <string name="hello_workout">Здесь будут тренировки</string>
+    <string name="hello_profile">Это ваш профиль</string>
+</resources>
